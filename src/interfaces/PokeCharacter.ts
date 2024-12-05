@@ -2,12 +2,6 @@ export interface PokeCharacter {
     id: string;
     name: string;
     base_experience: string;
-    moves: {
-        move: {
-          name: string;
-          url: string;
-        };
-    }[];
     species: {
         name: string;
     };
@@ -17,4 +11,10 @@ export interface PokeCharacter {
             url: string;
         };
     }[];
+    sprites: {
+        front_default: string;
+        back_default: string;
+        front_shiny: string;
+        back_shiny: string;
+    };
 }

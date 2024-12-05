@@ -1,6 +1,7 @@
-import { useState } from 'react'
 import useSWR from "swr";
 import styled from "styled-components";
+import { PokeCharacter } from "../interfaces/PokeCharacter";
+import IndividualPokemon from "./IndividualPokemon";
 
 const ParentDiv = styled.div`
     display: flex;
@@ -21,6 +22,7 @@ function App() {
 
     // If the data hasn't loaded yet, display a loading message
     if (!data) return <h1>Loading...</h1>;
+    const pokemonList = data.results;
     
     // Once data is loaded, render the PokemonList component, passing the fetched data
     return (

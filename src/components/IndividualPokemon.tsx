@@ -27,12 +27,20 @@ const PokeImages = styled.div`
         height: auto;
     }
 `;
-export default function IndividualPokemon({id, name, base_experience, moves, species, past_types}:PokeCharacter){
+export default function IndividualPokemon({id, name, base_experience, species, past_types, sprites}:PokeCharacter){
     return(
         <IndividualPokeDiv>
-            <PokeImages>
-
-            </PokeImages>
+        <PokeImages>
+        <img src={sprites.front_default} alt={name} />
+        </PokeImages>
+            <h1>{name}</h1>
+            <p>{base_experience}</p>
+            <p>{species.name}</p>
+            <ul>
+                {past_types.map((type, index) => (
+                    <li key={index}>{type.generation.name}</li>
+                ))}
+            </ul>
         </IndividualPokeDiv>
-    )
+    );
 }
