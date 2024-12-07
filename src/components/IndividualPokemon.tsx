@@ -28,11 +28,16 @@ const PokeImages = styled.div`
     }
 `;
 export default function IndividualPokemon({name, url}:PokeCharacter){
+    
+    const result = url.match(/pokemon\/(\d+)\//)?.[1];
+    
     return(
         <IndividualPokeDiv>
-       
+            <PokeImages>
+            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${result}.png`}/>
+            </PokeImages>
             <h1>{name}</h1>
-            <p>{url}</p>
+            
         </IndividualPokeDiv>
     );
 }

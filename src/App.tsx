@@ -1,8 +1,5 @@
 import useSWR from 'swr';
 import styled from "styled-components";
-import NewComponent from './components/NewComponent';
-import { PokeCharacter } from "./interfaces/PokeCharacter";
-import IndividualPokemon from "./IndividualPokemon";
 import PokeList from './components/PokeList';
 
 
