@@ -1,22 +1,20 @@
 import useSWR from 'swr';
 
-export default function NewComponent({pokes,index}){
-    
-    const id =index+1;
-    const {data, error} = useSWR(`https://pokeapi.co/api/v2/pokemon/${id}/`, (url) => 
-        fetch(url)
-            .then(res => res.json())
-        );
+const fetcher = (url: string): Promise<any> => fetch(url).then((res) => res.json());
 
-    if(error) return <h3>Error</h3>
-    if (!data) return <h3>Loading ...</h3>
+export default function NewComponent({ pokes, index }) {
+    const id = index + 1;
+    const { data, error } = useSWR(`https://pokeapi.co/api/v2/pokemon/${id}/`, fetcher);
 
-    return(
-        <>
-            {
-                console.log("This is the data:" + data)
-            }
-        </>
+    if (error) return <h3>Error</h3>;
+    if (!data) return <h3>Loading ...</h3>;
+
+    console.log("This is the data:", data);
+
+    return (
+        <div>
+            <h3>{data.name}</h3>
+            <img src={data.sprites.front_default} alt={data.name} />
+        </div>
     );
-
 }
