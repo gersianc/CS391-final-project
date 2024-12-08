@@ -1,3 +1,4 @@
+// Gersian Collaku
 import styled from "styled-components";
 
 // container for the stats component
