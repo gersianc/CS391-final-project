@@ -7,13 +7,12 @@ const AbilityContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 20%;
-    padding: 2.5%;
-    margin: 4.75%;
-    background-color: white; 
-    color: black; 
+    width: 80%;
+    padding: 2%;
+    margin: 2%;
+    background-color: #f9f9f9; 
     border: 1px black solid;
-    border-radius: 1%;
+    border-radius: 2%;
     text-wrap: balance;
 `;
 
@@ -23,11 +22,13 @@ const AbilityCard = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 5%;
-    padding: 5%;
+    text-align: center;
+    margin: 2%;
+    padding: 3%;
     border: 1px solid black;
-    border-radius: 5px;
+    border-radius: 2%;
     background-color: #fff;
+    box-shadow: 0 2% 4% rgba(0, 0, 0, 0.1);
     width: 80%;
 `;
 
