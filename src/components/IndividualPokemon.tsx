@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import useSWR from "swr";
+import Abilities from "./Abilities.tsx";
 import { PokeCharacter } from "../interfaces/PokeCharacter";
 
 const IndividualPokeDiv = styled.div`
@@ -27,16 +29,31 @@ const PokeImages = styled.div`
         height: auto;
     }
 `;
+
+// fetcher function
+const fetcher = (url: string): Promise<any> => fetch(url).then((res) => res.json());
+
+// main component to render an individual Pokemon
 export default function IndividualPokemon({name, url}:PokeCharacter){
-    
+    // extracting Pokemon ID from the URL
     const result = url.match(/pokemon\/(\d+)\//)?.[1];
-    
+
+    // fetch Pokemon details using useSWR
+    const {data, error} = useSWR(`https://pokeapi.co/api/v2/pokemon/${result}/`, fetcher);
+
+    // error handling
+    if (error) return <h3>Error loading Pokemon details</h3>;
+    // display loading message
+    if (!data) return <h3>Loading...</h3>;
+
+    // render Pokemon details
     return(
         <IndividualPokeDiv>
             <PokeImages>
             <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${result}.png`}/>
             </PokeImages>
             <h1>{name}</h1>
+            <Abilities abilities={data.abilities}/>
             
         </IndividualPokeDiv>
     );
