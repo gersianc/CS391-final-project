@@ -1,8 +1,10 @@
+// Stavros Constantinou
 import styled from "styled-components";
 import useSWR from "swr";
 import Abilities from "./Abilities.tsx";
 import { PokeCharacter } from "../interfaces/PokeCharacter";
 
+// Styled container for the Pokemon card
 const IndividualPokeDiv = styled.div`
     display: flex;
     flex-direction: column;
@@ -30,31 +32,37 @@ const PokeImages = styled.div`
     }
 `;
 
-// fetcher function
+// Fetcher function for API requests
 const fetcher = (url: string): Promise<any> => fetch(url).then((res) => res.json());
 
-// main component to render an individual Pokemon
+// Main component to render an individual Pokemon
 export default function IndividualPokemon({name, url}:PokeCharacter){
-    // extracting Pokemon ID from the URL
+
+    // Extracting Pokemon ID from the URL
     const result = url.match(/pokemon\/(\d+)\//)?.[1];
 
-    // fetch Pokemon details using useSWR
+    // Fetching Pokemon details using useSWR
     const {data, error} = useSWR(`https://pokeapi.co/api/v2/pokemon/${result}/`, fetcher);
 
-    // error handling
+    // Error handling during API fetch
     if (error) return <h3>Error loading Pokemon details</h3>;
-    // display loading message
+
+    // Display loading message
     if (!data) return <h3>Loading...</h3>;
 
-    // render Pokemon details
+    // Render Pokemon details, including name, image, and abilities
     return(
         <IndividualPokeDiv>
+            {/*Pokemon Image*/}
             <PokeImages>
             <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${result}.png`}/>
             </PokeImages>
+
+            {/*Pokemon Name*/}
             <h1>{name}</h1>
+
+            {/*Abilities List*/}
             <Abilities abilities={data.abilities}/>
-            
         </IndividualPokeDiv>
     );
 }

@@ -1,7 +1,8 @@
+// Amy (Ah Hyun) Wi
 import styled from "styled-components";
 import useSWR from "swr";
 
-// container for the abilities list
+// Styled container for the list of abilities
 const AbilityContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -16,7 +17,7 @@ const AbilityContainer = styled.div`
     text-wrap: balance;
 `;
 
-// card for individual ability details
+// Styled card for individual ability details
 const AbilityCard = styled.div`
     display: flex;
     flex-direction: column;
@@ -32,38 +33,41 @@ const AbilityCard = styled.div`
     width: 80%;
 `;
 
-// fetcher function for useSWR handling API requests
+// Fetcher function for useSWR to fetch data from the API
 const fetcher = (url: string): Promise<any> => fetch(url).then((res) => res.json());
 
-// display list of abilities
+// Main component to display list of abilities
 const Abilities = ({abilities}: {abilities: {ability: {name: string; url: string}}[]}) => {
     return (
         <AbilityContainer>
             <h2>Abilities</h2>
             {abilities.map(({ability}) => (
-                // each ability is fetched and rendered
+                // Each ability is fetched and rendered using AbilityItem
                 <AbilityItem key={ability.name} abilityUrl={ability.url} />
             ))}
         </AbilityContainer>
     );
 };
 
-// component to fetch and display details of a single ability
+// Component to fetch and display details of a single ability
 const AbilityItem = ({abilityUrl}: {abilityUrl: string}) => {
+
+    // Fetch ability details using useSWR
     const {data, error} = useSWR(abilityUrl, fetcher);
 
-    // error handling
+    // Error handling during API fetch
     if (error) return <p>Error loading ability</p>;
 
-    // display loading message
+    // Display loading message while data is being fetched
     if (!data) return <p>Loading...</p>;
 
-    // getting relevant data
+    // Extracting relevant data from the fetched ability details
     const {name, effect_entries} = data;
     const shortEffect=
         effect_entries.find((entry: any) =>
             entry.language.name === "en")?.short_effect || "No description available.";
 
+    // Rendering the ability details as a card
     return (
         <AbilityCard>
             <h3>{name}</h3>
