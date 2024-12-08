@@ -1,4 +1,4 @@
-// Gersian Collaku
+// Component contributions were made as a group here.
 import styled from "styled-components";
 import {PokeCharacter} from "../interfaces/PokeCharacter";
 import IndividualPokemon from "./IndividualPokemon";

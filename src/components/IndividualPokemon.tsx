@@ -3,6 +3,8 @@ import styled from "styled-components";
 import useSWR from "swr";
 import Abilities from "./Abilities.tsx";
 import { PokeCharacter } from "../interfaces/PokeCharacter";
+import Stats from "./Stats";
+
 
 // Styled container for the Pokemon card
 const IndividualPokeDiv = styled.div`
@@ -18,6 +20,7 @@ const IndividualPokeDiv = styled.div`
     border-radius: 1%;
     text-wrap: balance;
     text-align: center;
+    align-items: center;
 `;
 
 // Styled component for the Pokemon images, setting layout and sizing of the images
@@ -63,6 +66,9 @@ export default function IndividualPokemon({name, url}:PokeCharacter){
 
             {/*Abilities List*/}
             <Abilities abilities={data.abilities}/>
+
+            {/*Stats List*/}
+            <Stats stats={data.stats} />
         </IndividualPokeDiv>
     );
 }
