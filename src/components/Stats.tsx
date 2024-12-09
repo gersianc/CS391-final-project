@@ -44,6 +44,7 @@ const StatBar = styled.div<{ width: number }>`
     font-size: 0.9rem;
 `;
 
+//stat property where basestat is the number and stat.name for the name of the given stat.
 interface StatsProps {
     stats: { base_stat: number; stat: { name: string } }[];
 }
@@ -54,10 +55,11 @@ function Stats({ stats }: StatsProps) {
     return (
         <StatsContainer>
             <h3>Stats</h3>
-            {stats.map(({ base_stat, stat }) => (
+            {stats.map(({ base_stat, stat }) => (    //getting the stats
                 <StatWrapper key={stat.name}>
                     <StatLabel>{stat.name}</StatLabel>
                     <StatBar width={(base_stat / 200) * 100}>{base_stat}</StatBar>
+                    {/*tried making the stat bar not full here*/}
                 </StatWrapper>
             ))}
         </StatsContainer>
